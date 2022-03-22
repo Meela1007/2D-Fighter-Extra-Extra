@@ -14,6 +14,8 @@ public class Movement : MonoBehaviour
     private float horizontalMovement = 0f;
     private float jumpForce = 7f;
 
+    public int facing = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,6 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         myRigidbody.velocity = new Vector2(horizontalMovement * speed, myRigidbody.velocity.y);
-        animator.SetFloat("speed", horizontalMovement);
+        animator.SetFloat("speed", Mathf.Abs(horizontalMovement);
     }
 }

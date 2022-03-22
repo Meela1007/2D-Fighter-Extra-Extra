@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private float maxHealth = 100 %
-    private float CurrentHealth;
+    private float maxHealth = 100;
+    private float currentHealth;
 
     private float hitTimer = 0.15f;
     private bool isHit = false;
@@ -17,18 +17,33 @@ public class Health : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
-        CurrentHealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (CurrentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
+    
     }
 
+    public void TakeDamage(float damageTaken) 
+    {
+        if (isHit) 
+        {
+            if (GetComponent<Fight>().blockCheck)
+            {
+                currentHealth -= damageTaken / 2;
+            } else 
+            {
+                currentHealth -= damageTaken;
+                StartCoroutine(KnockBack());
+            }
+        }
+    }
 
     private void Die()
     {
